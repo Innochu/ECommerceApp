@@ -1,4 +1,11 @@
+using ECommerceApp.Application.Repository.Implementation;
+using ECommerceApp.Application.Repository.Interface;
+using ECommerceApp.Application.Service.Implementation;
+using ECommerceApp.Application.Service.Interface;
+using ECommerceApp.Application.Services;
 using ECommerceApp.Infrastructure.DbContextFolder;
+using ECommerceApp.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +14,12 @@ builder.AddServiceDefaults();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDbContext>(option => option()
+builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
 // Add services to the container.
 builder.Services.AddProblemDetails();
 

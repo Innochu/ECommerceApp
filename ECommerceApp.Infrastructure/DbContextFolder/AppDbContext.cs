@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using ECommerceApp.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace ECommerceApp.Infrastructure.DbContext
+namespace ECommerceApp.Infrastructure.DbContextFolder
 {
-    internal class AppDbContext
+    public class AppDbContext : DbContext
     {
+        public DbSet<Product> Products { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
+        {
+           
+        }
     }
 }

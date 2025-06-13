@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ECommerceApp.Domain.Entities;
 
 namespace ECommerceApp.Application.Repository.Interface
 {
-    internal interface IProductRepository
+    public interface IProductRepository
     {
+        Task<IEnumerable<Product>> GetAllProductsAsync();
+        Task<Product> GetProductByIdAsync(int id);
     }
 }
