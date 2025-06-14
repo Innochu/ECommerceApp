@@ -1,4 +1,5 @@
 ﻿using ECommerceApp.Application.Service.Interface;
+using ECommerceApp.Application.Services;
 using ECommerceApp.Domain.Entities;
 using ECommerceApp.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +16,24 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<BaseResponseModel>>> GetAllProducts()
+    public async Task<ActionResult<BaseResponseModel>> GetAllProducts()
     {
-        return Ok(await _productService.GetAllProductsAsync());
+        var products = await _productService.GetAllProductsAsync();
+        return Ok(new BaseResponseModel
+        {
+            success = true,
+            Data = products
+        });
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<BaseResponseModel>> GetProductById(int id)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteProduct(int id)
     {
-        var product = await _productService.GetProductByIdAsync(id);
-        if (product == null) return NotFound();
-        return Ok(product);
+        var result = await _productService.DeleteProductAsync(id);
+        if (!result)
+        {
+            return Ok(new BaseResponseModel { success = false, ErrorMessage = "Not Found" });
+        }
+        return Ok(new BaseResponseModel { success = true });
     }
 }

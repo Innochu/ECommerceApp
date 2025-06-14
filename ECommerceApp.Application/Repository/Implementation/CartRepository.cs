@@ -14,9 +14,9 @@ namespace ECommerceApp.Application.Repository.Implementation
             _context = context;
         }
 
-        public async Task<CartItem> GetCartAsync()
+        public async Task<IEnumerable<CartItem>> GetCartAsync()
         {
-            return await _context.CartItems.Include(c => c.Product).FirstOrDefaultAsync();
+            return  _context.CartItems.Include(c => c.Product).ToList();
         }
 
         public async Task<bool> AddToCartAsync(CartItem item)

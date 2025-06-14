@@ -23,5 +23,19 @@ namespace ECommerceApp.Infrastructure.Repositories
         {
             return await _context.Products.FindAsync(id);
         }
+        public async Task<bool> UpdateProductAsync(Product product)
+        {
+            _context.Products.Update(product);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> DeleteProductAsync(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null) return false;
+
+            _context.Products.Remove(product);
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }

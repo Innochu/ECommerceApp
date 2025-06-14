@@ -1,4 +1,5 @@
 ﻿using ECommerceApp.Application.Service.Interface;
+using ECommerceApp.Domain.Dto;
 using ECommerceApp.Domain.Entities;
 using ECommerceApp.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -16,20 +17,24 @@ namespace ECommerceApp.ApiService.Controllers
             _cartService = cartService;
         }
 
-        // Get all cart items
         [HttpGet]
         public async Task<ActionResult<BaseResponseModel>> GetCart()
         {
-            return Ok(await _cartService.GetCartAsync());
+            var cartItems = await _cartService.GetCartAsync();
+            return Ok(new BaseResponseModel
+            {
+                success = true,
+                Data = cartItems
+            });
         }
 
-        // Add an item to the cart
+  
         [HttpPost]
-        public async Task<ActionResult<CartItem>> AddToCart([FromBody] CartItem item)
+        public async Task<ActionResult<CartItem>> AddToCart([FromBody] AddProductToCartDto item)
         {
             if (item == null) return BadRequest();
             await _cartService.AddToCartAsync(item);
-            return CreatedAtAction(nameof(GetCart), new { id = item.Id }, item);
+            return CreatedAtAction(nameof(GetCart), new { id = item.ProductId }, item);
         }
 
         // Update an item in the cart

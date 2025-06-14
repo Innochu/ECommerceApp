@@ -1,0 +1,34 @@
+﻿@page "/cart"
+@using ECommerceApp.Web.Components.BaseComponent;
+
+<h3>Cart</h3>
+@if (cartItems == null || !cartItems.Any())
+{
+    <p>Loading or no products available...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>S/N</th>
+                <th>ProductName</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cart in cartItems)
+            {
+                <tr>
+                    <td>@cart.Id</td>
+                    <td>@cart.Product.ProductName</td>
+                    <td>@cart.Quantity.ToString()</td>
+                   <td>@((cart.Quantity * cart.Product.Price).ToString("C", new System.Globalization.CultureInfo("en-NG")))</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

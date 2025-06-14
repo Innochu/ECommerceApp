@@ -1,5 +1,6 @@
 ﻿using ECommerceApp.Application.Repository.Interface;
 using ECommerceApp.Application.Service.Interface;
+using ECommerceApp.Domain.Dto;
 using ECommerceApp.Domain.Entities;
 
 namespace ECommerceApp.Application.Service.Implementation
@@ -13,15 +14,22 @@ namespace ECommerceApp.Application.Service.Implementation
             _cartRepository = cartRepository;
         }
 
-        public async Task<CartItem> GetCartAsync()
+        public async Task<IEnumerable<CartItem>> GetCartAsync()
         {
             return await _cartRepository.GetCartAsync();
         }
 
-        public async Task<bool> AddToCartAsync(CartItem item)
+        public async Task<bool> AddToCartAsync(AddProductToCartDto item)
         {
-            return await _cartRepository.AddToCartAsync(item);
+            var cartItem = new CartItem
+            {
+                ProductId = item.ProductId,
+                Quantity = item.Quantity,
+            };
+
+            return await _cartRepository.AddToCartAsync(cartItem);
         }
+
 
         public async Task<bool> UpdateCartItemAsync(CartItem item)
         {

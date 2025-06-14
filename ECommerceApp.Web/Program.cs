@@ -1,3 +1,4 @@
+using Blazored.Toast;
 using ECommerceApp.Web;
 using ECommerceApp.Web.Components;
 
@@ -9,15 +10,16 @@ builder.AddServiceDefaults();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddBlazoredToast();
 
 builder.Services.AddOutputCache();
 
-builder.Services.AddHttpClient<WeatherApiClient>(client =>
-    {
-        // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
-        // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
-        client.BaseAddress = new("https+http://apiservice");
-    });
+
+builder.Services.AddHttpClient<ApiClient>(client =>
+{
+    // This will use Aspire's service discovery
+    client.BaseAddress = new Uri(builder.Configuration.GetConnectionString("api") ?? "https://localhost:7424/");
+});
 
 var app = builder.Build();
 

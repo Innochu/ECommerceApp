@@ -22,6 +22,14 @@ namespace ECommerceApp.Application.Services
         {
             return await _productRepository.GetProductByIdAsync(id);
         }
+        public async Task<bool> UpdateProductAsync(Product product)
+        {
+            return await _productRepository.UpdateProductAsync(product);
+        }
 
+        public async Task<bool> DeleteProductAsync(int id)
+        {
+            return await _productRepository.DeleteProductAsync(id);
+        }
     }
 }
