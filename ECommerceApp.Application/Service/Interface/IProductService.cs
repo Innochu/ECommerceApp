@@ -1,5 +1,4 @@
-﻿using ECommerceApp.Domain.Entities;
-
+﻿
 namespace ECommerceApp.Application.Service.Interface
 {
     public interface IProductService

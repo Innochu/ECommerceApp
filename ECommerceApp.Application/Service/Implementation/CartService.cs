@@ -1,7 +1,5 @@
 ﻿using ECommerceApp.Application.Repository.Interface;
-using ECommerceApp.Application.Service.Interface;
-using ECommerceApp.Domain.Dto;
-using ECommerceApp.Domain.Entities;
+
 
 namespace ECommerceApp.Application.Service.Implementation
 {

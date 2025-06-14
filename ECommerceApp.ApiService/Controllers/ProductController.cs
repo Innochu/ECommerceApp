@@ -1,10 +1,4 @@
-﻿using ECommerceApp.Application.Service.Interface;
-using ECommerceApp.Application.Services;
-using ECommerceApp.Domain.Entities;
-using ECommerceApp.Domain.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ECommerceApp.API.Controllers
+﻿namespace ECommerceApp.API.Controllers
 {
     /// <summary>
     /// Handles product-related operations such as retrieving and deleting products.

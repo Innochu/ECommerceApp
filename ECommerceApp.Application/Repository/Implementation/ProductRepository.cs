@@ -1,9 +1,4 @@
-﻿using ECommerceApp.Application.Repository.Interface;
-using ECommerceApp.Domain.Entities;
-using ECommerceApp.Infrastructure.DbContextFolder;
-using Microsoft.EntityFrameworkCore;
-
-namespace ECommerceApp.Infrastructure.Repositories
+﻿namespace ECommerceApp.Infrastructure.Repositories
 {
     public class ProductRepository : IProductRepository
     {

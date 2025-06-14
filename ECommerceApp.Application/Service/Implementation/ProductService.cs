@@ -1,7 +1,4 @@
-﻿using ECommerceApp.Application.Repository.Interface;
-using ECommerceApp.Application.Service.Interface;
-using ECommerceApp.Domain.Entities;
-
+﻿
 namespace ECommerceApp.Application.Services
 {
     public class ProductService : IProductService

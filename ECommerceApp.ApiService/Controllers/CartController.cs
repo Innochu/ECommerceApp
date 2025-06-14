@@ -1,10 +1,4 @@
-﻿using ECommerceApp.Application.Service.Interface;
-using ECommerceApp.Domain.Dto;
-using ECommerceApp.Domain.Entities;
-using ECommerceApp.Domain.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ECommerceApp.ApiService.Controllers
+﻿namespace ECommerceApp.ApiService.Controllers
 {
     /// <summary>
     /// Manages shopping cart operations such as retrieving, adding, updating, and removing items.

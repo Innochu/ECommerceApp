@@ -1,7 +1,4 @@
-﻿using ECommerceApp.Application.Repository.Interface;
-using ECommerceApp.Domain.Entities;
-using ECommerceApp.Infrastructure.DbContextFolder;
-using Microsoft.EntityFrameworkCore;
+﻿
 
 namespace ECommerceApp.Application.Repository.Implementation
 {

@@ -1,12 +1,3 @@
-using ECommerceApp.Application.Repository.Implementation;
-using ECommerceApp.Application.Repository.Interface;
-using ECommerceApp.Application.Service.Implementation;
-using ECommerceApp.Application.Service.Interface;
-using ECommerceApp.Application.Services;
-using ECommerceApp.Infrastructure.DbContextFolder;
-using ECommerceApp.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.

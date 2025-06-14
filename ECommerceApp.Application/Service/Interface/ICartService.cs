@@ -1,6 +1,4 @@
-﻿using ECommerceApp.Domain.Dto;
-using ECommerceApp.Domain.Entities;
-
+﻿
 namespace ECommerceApp.Application.Service.Interface
 {
     public interface ICartService
