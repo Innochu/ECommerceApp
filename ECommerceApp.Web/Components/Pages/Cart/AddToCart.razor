@@ -1,0 +1,62 @@
+﻿@page "/add-to-cart"
+@using ECommerceApp.Web.Components.BaseComponent;
+@inherits AddToCartPage
+@rendermode InteractiveServer
+
+<h3>Add to Cart</h3>
+
+@if (products == null || !products.Any())
+{
+    <p>Loading products...</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var product in products)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.ProductName</h5>
+                        <p class="card-text">
+                            <strong>Price:</strong> @product.Price.ToString("C", new System.Globalization.CultureInfo("en-NG"))
+                        </p>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Quantity</span>
+                            <input type="number"
+                                   class="form-control"
+                                   @bind="selectedQuantities[product.Id]"
+                                   @bind:event="oninput"
+                                   min="1"
+                                   max="100" />
+                        </div>
+                        <button class="btn btn-primary"
+                                @onclick="@(() => AddToCart(product.Id))"
+                                disabled="@isLoading">
+                            @if (isLoading)
+                            {
+                                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            }
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@if (showModal)
+{
+    <AppModal @ref="Modal">
+        <Title>
+            @modalTitle
+        </Title>
+        <Body>
+            <p>@modalMessage</p>
+        </Body>
+        <Footer>
+            <button class="btn btn-primary" @onclick="CloseModal">OK</button>
+        </Footer>
+    </AppModal>
+}

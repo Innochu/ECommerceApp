@@ -1,7 +1,9 @@
 ﻿@page "/product"
 @using ECommerceApp.Web.Components.BaseComponent;
+@inject NavigationManager NavigationManager
 
 <h3>Product</h3>
+
 @if (Products == null || !Products.Any())
 {
     <p>Loading or no products available...</p>
@@ -25,5 +27,5 @@ else
             }
         </tbody>
     </table>
-    
 }
+

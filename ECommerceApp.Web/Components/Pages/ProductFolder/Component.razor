@@ -1,0 +1,67 @@
+@* @using ECommerceApp.Web.Components.BaseComponent;
+
+<div class="add-to-cart-container">
+    <div class="input-group mb-2">
+        <span class="input-group-text">Qty</span>
+        <input type="number" class="form-control" @bind="Quantity" min="1" style="max-width: 80px;" />
+    </div>
+
+    <button class="btn btn-primary btn-sm" @onclick="HandleAddToCart" disabled="isLoading">
+        @if (isLoading)
+        {
+            <span class="spinner-border spinner-border-sm me-1"></span>
+        }
+        <i class="fas fa-cart-plus me-1"></i>
+        Add to Cart
+    </button>
+</div>
+
+@code {
+    [Parameter] public int ProductId { get; set; }
+    [Parameter] public EventCallback<bool> OnCartUpdated { get; set; }
+
+    [Inject] public ApiClient ApiClient { get; set; }
+    [Inject] private IToastService ToastService { get; set; }
+
+    public int Quantity { get; set; } = 1;
+    private bool isLoading = false;
+
+    private async Task HandleAddToCart()
+    {
+        try
+        {
+            isLoading = true;
+            StateHasChanged();
+
+            var cartItem = new
+            {
+                ProductId = ProductId,
+                Quantity = Quantity
+            };
+
+            var response = await ApiClient.PostAsJsonAsync<object, BaseResponseModel>("api/cart", cartItem);
+
+            if (response != null && response.success)
+            {
+                ToastService.ShowSuccess($"Added {Quantity} item(s) to cart!");
+                await OnCartUpdated.InvokeAsync(true);
+            }
+            else
+            {
+                var errorMessage = response?.message ?? "Failed to add item to cart";
+                ToastService.ShowError(errorMessage);
+                await OnCartUpdated.InvokeAsync(false);
+            }
+        }
+        catch (Exception ex)
+        {
+            ToastService.ShowError($"Error: {ex.Message}");
+            await OnCartUpdated.InvokeAsync(false);
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+} *@
